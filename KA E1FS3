@@ -1,0 +1,69 @@
+#include <iostream>
+
+using namespace std;
+
+void ausgeben(double nox[], int anzahl)
+{
+    for (int i = 0; i < anzahl; i++)
+    {
+        cout << nox[i] << endl;
+    }
+} // Max 10 erreichbare Pkt
+
+double durchschnitt(double nox[], int anzahl)
+{
+    double summe = 0;
+    for (int i = 0; i < anzahl; i++)
+    {
+        summe = summe + nox[i];
+    }
+    return summe / anzahl;
+} // Max 13 erreichbare Pkt
+
+int letzterKilometerMit(double nox[], int anzahl, double suchwert)
+{
+    int i = anzahl-1;
+    while (nox[i] != suchwert && i >= 0)
+    {
+        i--;
+    }
+    int ergebnis = -1;
+    if (i != -1)
+    {
+        ergebnis = i+1;
+    }
+    return ergebnis; // 2
+} // Max 14 erreichbare Pkt
+
+void systemherstellerkorrektur(double nox[], int anzahl, double maxWert)
+{
+    for (int i = 0; i < anzahl; i++)
+    {
+        if ((nox[i] / 2.0) > maxWert)
+        {
+            nox[i] = maxWert;
+        }
+        else
+        {
+            nox[i] = nox[i] / 2;
+        }
+    }
+} // Max 8 erreichbare Pkt
+
+int main()
+{
+    int anzahl = 23;
+    double nox[anzahl] = {30.6, 60.4, 472.68, 79.5, 427.7, 151.3, 374.7, 410.2, 539.8, 673.4, 740.3,
+                      1268.7, 1854.34, 457.2, 884.5, 1578.23, 472.68, 352.6, 299.3, 620.3, 528.43, 472.68,
+                      83.7
+                     };
+    ausgeben(nox, anzahl);
+    cout << "Durschschnitt aller Werte: " << durchschnitt(nox, anzahl) << endl;
+    cout << "Letzter Kilometer an dem Suchwert gemessen wurde: " << letzterKilometerMit(nox, anzahl, 472.68) << endl; // 1 Pkt
+
+    systemherstellerkorrektur(nox, anzahl, 80);
+    ausgeben(nox, anzahl);
+    cout << "Durschschnitt aller Werte nach Korrektur: " << durchschnitt(nox, anzahl) << endl;
+
+    return 0;
+    } //Max 5 erreichte Pkt
